@@ -1,1 +1,3 @@
-# repo
+# repo# Rpm's for openSUSE TumbleWeed (machine fully Updated)
+# Looking for testers that have the hardware to test the
+# specific drivers included

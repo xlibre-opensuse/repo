@@ -1,0 +1,28 @@
+# For OpenSUSE Tumbleweed
+
+# First install necessary packages
+zypper in gcc cmake meson xorg-x11-server-source xorg-x11-server-Xspice \
+libX11-devel libpixman-1-0-devel libXfont2-devel libxshmfence-devel \
+xkbcomp-devel dbus-1-devel libseat1 systemd-devel font-util \
+libxcvt-devel seatd-devel libgbm-devel libepoxy-devel nettle \
+libsha1detectcoll-devel libgcrypt-devel libopenssl-3-devel libnettle-devel \
+libmd-devel xcb xcb-proto-devel xcb-util-devel xcb-util-wm-devel \
+libpciaccess-devel libdrm-devel libinput-devel xf86-input-libinput-devel \
+xorgproto-devel util-macros-devel libXdmcp-devel libXres-devel spice-protocol-devel
+
+# Extract the Xlibre file and cd to the directory
+export XLIBRE_SRC="$(pwd)"
+export XLIBRE_BUILD="${XLIBRE_SRC}/build"
+export XLIBRE_PREFIX="${XLIBRE_SRC}/image"
+export XLIBRE_PREFIX="/usr"
+
+meson setup --prefix "$XLIBRE_PREFIX" "$XLIBRE_BUILD" --buildtype release -Dxnest=false --localstatedir /var --sysconfdir /etc/X11
+ninja -C "$XLIBRE_BUILD" install
+
+# Extract libinput, cd to the directory and was simply this IIRC 
+PKG_CONFIG_PATH="${XLIBRE_PREFIX}/lib/pkgconfig" 
+ninja -C build install
+
+
+# --localstatedir is important /var not /usr/local/var
+# otherwise XLibre won't start
