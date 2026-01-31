@@ -19,7 +19,7 @@ export XLIBRE_PREFIX="/usr"
 meson setup --prefix "$XLIBRE_PREFIX" "$XLIBRE_BUILD" --buildtype release -Dxnest=false --localstatedir /var --sysconfdir /etc/X11
 ninja -C "$XLIBRE_BUILD" install
 
-# Extract libinput, cd to the directory and was simply this IIRC 
+# Extract libinput, cd to the directory 
 PKG_CONFIG_PATH="${XLIBRE_PREFIX}/lib/pkgconfig" 
 ninja -C build install
 
