@@ -57,7 +57,7 @@ xorgproto-devel util-macros-devel libXdmcp-devel libXres-devel spice-protocol-de
 # Extract the XLibre source tarball and cd into the extracted directory
 export XLIBRE_SRC="$(pwd)"
 export XLIBRE_BUILD="${XLIBRE_SRC}/build"
-export XLIBRE_PREFIX="/usr"           # Recommended: system-wide install in /usr
+export XLIBRE_PREFIX="/usr" 
 
 meson setup --prefix "$XLIBRE_PREFIX" "$XLIBRE_BUILD" --buildtype release -Dxnest=false --localstatedir /var --sysconfdir /etc/X11
 
