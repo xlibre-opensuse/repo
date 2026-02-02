@@ -1,2 +1,3 @@
 repodata/*.xml*
 repodata/*.zst
+repodata/
