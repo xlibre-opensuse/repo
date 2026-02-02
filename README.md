@@ -2,38 +2,47 @@
 
 This repository provides RPM packages and source RPMs for XLibre (a fork of the X.Org X11 server) on openSUSE Tumbleweed.
 
-### Adding the Repositories with zypper
-
+### Adding the Repositories
 ```sh
-# Main binary packages repository (x86_64) - enabled by default
-sudo zypper addrepo \
-  --name "xlibre-git-x86_64" \
-  --enable \
-  --refresh \
-  --gpgcheck \
-  https://raw.githubusercontent.com/xlibre-opensuse/repo/main/x86_64/ \
-  xlibre-git-x86_64
+Download the repository configuration files from the repo root and place them in `/etc/zypp/repos.d/`
+sudo cp *.repo /etc/zypp/repos.d/
+sudo zypper refresh
   
-# Source RPMs repository - disabled by default
-# Enable it only when you need to build from source:
-#   sudo zypper modifyrepo --enable xlibre-git-srcs
-sudo zypper addrepo \
-  --name "xlibre-git-srcs" \
-  --disable \
-  --refresh \
-  --gpgcheck \
-  https://raw.githubusercontent.com/xlibre-opensuse/repo/main/SRPMS/ \
-  xlibre-git-srcs
-  
-  sudo zypper refresh
-  
-# If you need to enable the src repo first do 
-zypper lr
+# If you need to enable/disable the src repo first do 
+sudo zypper lr
 
 # Make note of the number of the "xlibre-git-srcs" repo then 
-zypper mr -e <number>
-# To disable the repo again do
-zypper mr -d <number>
+# Normally you would keep this repo disabled
+# Take notice of the number of the src repo then do
+
+# To enable the repo do
+sudo zypper mr -e <number>
+
+# To disable the repo do
+sudo zypper mr -d <number>
+
+# Install the XLibre Server
+# Force-install the server <required due to replacement of upstream packages>
+# Check to see that xf86-input-libinput is installed or you won't have a 
+# keyboard and mouse in graphical runlevel 5 - runlevel 3 should work regardless
+# Notice it will want to uninstall plasma6-x11 - that's what the next step is for
+sudo zypper in  --force --replacefiles x11-xlibre
+
+# Download the package -- MAKE NOTE OF THE LOCATION ON YOUR HARDDRIVE !!
+sudo zypper download plasma6-session-x11
+
+# Install it, ignoring dependencies and forcing overwrite if needed
+sudo rpm -Uvh --nodeps --force <path to location of the file>/plasma6-session-x11-*.rpm
+
+# After this step log out and back in (or reboot if necessary)
+# you should see the "Plasma (X11)" option in the session chooser.
+
+# 4. Install the rest of the stack (optional) -- you may need to use 
+# the zypper flags (intel mostly) --- try the x11-xlibre-meta package
+sudo zypper install x11-xlibre-meta
+
+# See what's installed 
+sudo zypper se xlibre
 
 ```
 # Building from Source

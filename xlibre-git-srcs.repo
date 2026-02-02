@@ -1,0 +1,10 @@
+[xlibre-git-srcs]
+name=xlibre-git-srcs
+enabled=0
+autorefresh=1
+baseurl=https://raw.githubusercontent.com/xlibre-opensuse/repo/main/SRPMS/
+path=/
+type=rpm-md
+gpgcheck=1
+gpgkey=https://raw.githubusercontent.com/xlibre-opensuse/repo/main/outtathebox5319-rpm-signing-key.asc
+keeppackages=0
