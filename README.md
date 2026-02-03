@@ -1,59 +1,82 @@
 ## Tumbleweed Repository for XLibre
 
-This repository provides RPM packages and source RPMs for XLibre (a fork of the X.Org X11 server) on openSUSE Tumbleweed.
+This repository provides RPM packages and source RPMs
 
-### Adding the Repositories
+for XLibre (a fork of the X.Org X11 server) on openSUSE Tumbleweed.
+
+## Adding the Repositories
+
+
+Download the repository configuration files 
+
+from the repo root and place them in " /etc/zypp/repos.d/ "
+
 ```sh
-Download the repository configuration files from the repo root and place them in `/etc/zypp/repos.d/`
+
 sudo cp *.repo /etc/zypp/repos.d/
 sudo zypper refresh
-  
-# If you need to enable/disable the src repo first do 
+
+```
+
+ If you need to enable/disable the src repo first do 
+```sh
 sudo zypper lr
 
-# Make note of the number of the "xlibre-git-srcs" repo then 
-# Normally you would keep this repo disabled
-# Take notice of the number of the src repo then do
+```
+ 
+Make note of the number of the "xlibre-git-srcs" repo. 
 
-# To enable the repo do
+Normally you would keep this repo disabled 
+
+Take notice of the number of the src repo
+
+To enable the repo do:
+```sh
 sudo zypper mr -e <number>
 
-# To disable the repo do
+ ```
+To disable the repo do:
+```sh
 sudo zypper mr -d <number>
 
-# Install the XLibre Server
-# Force-install the server <required due to replacement of upstream packages>
-# Check to see that xf86-input-libinput is installed or you won't have a 
-# keyboard and mouse in graphical runlevel 5 - runlevel 3 should work regardless
-# Notice it will want to uninstall plasma6-x11 - that's what the next step is for
-sudo zypper in  --force --replacefiles x11-xlibre
+```
+## Install the XLibre Server
+Check to see that xf86-input-libinput is installed or 
 
-# Download the package -- MAKE NOTE OF THE LOCATION ON YOUR HARDDRIVE !!
-sudo zypper download plasma6-session-x11
+you won't have a keyboard and mouse in 
 
-# Install it, ignoring dependencies and forcing overwrite if needed
-sudo rpm -Uvh --nodeps --force <path to location of the file>/plasma6-session-x11-*.rpm
+graphical runlevel 5 - runlevel 3 should work regardless
+```sh
 
-# After this step log out and back in (or reboot if necessary)
-# you should see the "Plasma (X11)" option in the session chooser.
+sudo zypper in  x11-xlibre
 
-# 4. Install the rest of the stack (optional) -- you may need to use 
-# the zypper flags (intel mostly) --- try the x11-xlibre-meta package
+```
+## After this step log out and back in (or reboot if necessary)
+## Install the rest of the stack (optional) 
+```sh
 sudo zypper install x11-xlibre-meta
 
-# See what's installed 
+```
+
+## See what's installed 
+```sh
 sudo zypper se xlibre
 
 ```
-# Building from Source
-If you want to compile from sources, there is a file named compile_xlibre_libinput in the xlibre-sources directory with similar instructions.
+## Building from Source
+If you want to compile from sources, there is a file named 
+
+compile_xlibre_libinput in the xlibre-sources directory with similar 
+instructions.
 
 Note: The pre-built RPMs do not include XNEST.
+
 If you need XNEST support, remove -Dxnest=false from the meson command line.
 
-# 1. Install build dependencies
+## 1. Install build dependencies
+
+Install necessary build packages
 ```sh
-# Install necessary build packages
 zypper in gcc cmake meson xorg-x11-server-source xorg-x11-server-Xspice \
 libX11-devel libpixman-1-0-devel libXfont2-devel libxshmfence-devel \
 xkbcomp-devel dbus-1-devel libseat1 systemd-devel font-util \
@@ -63,25 +86,38 @@ libmd-devel xcb xcb-proto-devel xcb-util-devel xcb-util-wm-devel \
 libpciaccess-devel libdrm-devel libinput-devel xf86-input-libinput-devel \
 xorgproto-devel util-macros-devel libXdmcp-devel libXres-devel spice-protocol-devel
 
-# Extract the XLibre source tarball and cd into the extracted directory
+```
+Extract the XLibre source tarball and cd into the extracted directory
+```sh
 export XLIBRE_SRC="$(pwd)"
 export XLIBRE_BUILD="${XLIBRE_SRC}/build"
 export XLIBRE_PREFIX="/usr" 
 
-meson setup --prefix "$XLIBRE_PREFIX" "$XLIBRE_BUILD" --buildtype release -Dxnest=false --localstatedir /var --sysconfdir /etc/X11
+meson setup --prefix "$XLIBRE_PREFIX" "$XLIBRE_BUILD"  \
+                        --buildtype release -Dxnest=false \
+                        --localstatedir /var \
+                        --sysconfdir /etc/X11
 
 ninja -C "$XLIBRE_BUILD" install
 
-# Important note: The --localstatedir=/var option is required.
-# If you use the default /usr/local/var, XLibre will fail to start.
-# At a minimum you must also install libinput or you will
-# have no keyboard and mouse runlevel 5 (Graphical)
+```
+Important note: The --localstatedir=/var option is required.
 
-# 3. Build and install libinput 
-# Extract the libinput source tarball and cd into the extracted directory
+If you use the default /usr/local/var, XLibre will fail to start.
+
+At a minimum you must also install libinput or you will
+
+have no keyboard and mouse runlevel 5 (Graphical)
+
+## Build and install libinput 
+ Extract the libinput source tarball and cd into the extracted directory
+```sh
+
 PKG_CONFIG_PATH="$$   {XLIBRE_PREFIX}/lib/pkgconfig:   $${PKG_CONFIG_PATH}"
 ninja -C build install
 
-# You're done !! Reboot
- 
+```
+You're done !! Reboot
+
+
  
