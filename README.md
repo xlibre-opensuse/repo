@@ -1,73 +1,57 @@
 ## Tumbleweed Repository for XLibre
-
 This repository provides RPM packages and source RPMs
-
 for XLibre (a fork of the X.Org X11 server) on openSUSE Tumbleweed.
 
 ## Adding the Repositories
-
-
 Download the repository configuration files 
-
-from the repo root and place them in " /etc/zypp/repos.d/ "
+from the repo root and place them in /etc/zypp/repos.d/
 
 ```sh
-
 sudo cp *.repo /etc/zypp/repos.d/
 sudo zypper refresh
-
 ```
 
- If you need to enable/disable the src repo first do 
+If you need to enable/disable the src repo first do 
 ```sh
 sudo zypper lr
-
 ```
- 
 Make note of the number of the "xlibre-git-srcs" repo. 
-
 Normally you would keep this repo disabled 
-
 Take notice of the number of the src repo
 
 To enable the repo do:
 ```sh
 sudo zypper mr -e <number>
+```
 
- ```
 To disable the repo do:
 ```sh
 sudo zypper mr -d <number>
-
 ```
+
 ## Install the XLibre Server
 Check to see that xf86-input-libinput is installed or 
-
 you won't have a keyboard and mouse in 
-
 graphical runlevel 5 - runlevel 3 should work regardless
 ```sh
-
 sudo zypper in  x11-xlibre
-
 ```
+
 ## After this step log out and back in (or reboot if necessary)
+
 ## Install the rest of the stack (optional) 
 ```sh
 sudo zypper install x11-xlibre-meta
-
 ```
 
 ## See what's installed 
 ```sh
 sudo zypper se xlibre
-
 ```
+
 ## Building from Source
 If you want to compile from sources, there is a file named 
-
-compile_xlibre_libinput in the xlibre-sources directory with similar 
-instructions.
+compile_xlibre_libinput in the xlibre-sources directory with similar instructions.
 
 Note: The pre-built RPMs do not include XNEST.
 
@@ -85,8 +69,8 @@ libsha1detectcoll-devel libgcrypt-devel libopenssl-3-devel libnettle-devel \
 libmd-devel xcb xcb-proto-devel xcb-util-devel xcb-util-wm-devel \
 libpciaccess-devel libdrm-devel libinput-devel xf86-input-libinput-devel \
 xorgproto-devel util-macros-devel libXdmcp-devel libXres-devel spice-protocol-devel
-
 ```
+
 Extract the XLibre source tarball and cd into the extracted directory
 ```sh
 export XLIBRE_SRC="$(pwd)"
@@ -99,23 +83,20 @@ meson setup --prefix "$XLIBRE_PREFIX" "$XLIBRE_BUILD"  \
                         --sysconfdir /etc/X11
 
 ninja -C "$XLIBRE_BUILD" install
-
 ```
+
 Important note: The --localstatedir=/var option is required.
 
 If you use the default /usr/local/var, XLibre will fail to start.
 
 At a minimum you must also install libinput or you will
-
 have no keyboard and mouse runlevel 5 (Graphical)
 
 ## Build and install libinput 
- Extract the libinput source tarball and cd into the extracted directory
+Extract the libinput source tarball and cd into the extracted directory
 ```sh
-
-PKG_CONFIG_PATH="$$   {XLIBRE_PREFIX}/lib/pkgconfig:   $${PKG_CONFIG_PATH}"
+PKG_CONFIG_PATH="${XLIBRE_PREFIX}/lib/pkgconfig"
 ninja -C build install
-
 ```
 You're done !! Reboot
 
