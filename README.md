@@ -32,22 +32,26 @@ sudo zypper mr -d <number>
 ## Install the XLibre Server
 Check to see that xf86-input-libinput is installed or 
 you won't have a keyboard and mouse in 
-graphical runlevel 5 - runlevel 3 should work regardless
+graphical runlevel 5 - runlevel 3 should work regardless.
+If you get a conflict chooser question choice number 3 "ignore dependencies" is the correct choice
 ```sh
 sudo zypper in  x11-xlibre
 ```
-
-## After this step log out and back in (or reboot if necessary)
-
-## Install the rest of the stack (optional) 
-```sh
-sudo zypper install x11-xlibre-meta
-```
+If you compile your video (or input) drivers "the hard way"
+(Nvidia.*.run) like I do be sure to install the x11-xlibre-devel
+package. Check with "zypper se x11-xlibre-devel" to see if they are installed already
 
 ## See what's installed 
 ```sh
 sudo zypper se xlibre
 ```
+
+## Install the rest (optional) 
+```sh
+sudo zypper install x11-xlibre-meta
+```
+
+#### After this step log out and back in (or reboot if necessary)
 
 ## Building from Source
 If you want to compile from sources, there is a file named 
