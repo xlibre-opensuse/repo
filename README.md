@@ -33,7 +33,7 @@ sudo zypper mr -d <number>
 Check to see that xf86-input-libinput is installed or 
 you won't have a keyboard and mouse in 
 graphical runlevel 5 - runlevel 3 should work regardless.
-If you get a conflict chooser question choice number 3 "ignore dependencies" is the correct choice
+If you get a conflict chooser question choice number 3 or 4 "ignore dependencies" is the correct choice
 ```sh
 sudo zypper in  x11-xlibre
 ```
