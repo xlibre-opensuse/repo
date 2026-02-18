@@ -6,5 +6,5 @@ baseurl=https://raw.githubusercontent.com/xlibre-opensuse/repo/main/SRPMS/
 path=/
 type=rpm-md
 gpgcheck=1
-gpgkey=https://raw.githubusercontent.com/xlibre-opensuse/repo/main/outtathebox5319-rpm-signing-key.asc
+gpgkey=https://raw.githubusercontent.com/xlibre-opensuse/repo/main/key.asc
 keeppackages=0
