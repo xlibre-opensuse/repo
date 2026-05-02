@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <repomd xmlns="http://linux.duke.edu/metadata/repo" xmlns:rpm="http://linux.duke.edu/metadata/rpm">
+<<<<<<< HEAD
   <revision>1776901649</revision>
   <data type="primary">
     <checksum type="sha256">b71f86a0d27d1fb66bafbf2974c1fb250c4d513904aff02d4c44c13aa8b859f6</checksum>
@@ -24,5 +25,31 @@
     <timestamp>1776901649</timestamp>
     <size>1162</size>
     <open-size>5306</open-size>
+=======
+  <revision>1777682425</revision>
+  <data type="primary">
+    <checksum type="sha256">b3dddddf0c799640bed5ca73b60373ac20b6dfac1047342faba7d7dce0c9e893</checksum>
+    <open-checksum type="sha256">92dfef70579f5d4eea4b9e509c8c7a753fe60ac427b15f8a9d077291c97635fe</open-checksum>
+    <location href="repodata/b3dddddf0c799640bed5ca73b60373ac20b6dfac1047342faba7d7dce0c9e893-primary.xml.zst"/>
+    <timestamp>1777682425</timestamp>
+    <size>2837</size>
+    <open-size>22936</open-size>
+  </data>
+  <data type="filelists">
+    <checksum type="sha256">2654f62f3c39e0d0db74b5e170eba3c481b50f6958eaef75bf9caac4167075d3</checksum>
+    <open-checksum type="sha256">7063583f4c0013937733400516d1b02491384598ab7c262d0439da987e6ba6db</open-checksum>
+    <location href="repodata/2654f62f3c39e0d0db74b5e170eba3c481b50f6958eaef75bf9caac4167075d3-filelists.xml.zst"/>
+    <timestamp>1777682425</timestamp>
+    <size>1026</size>
+    <open-size>3892</open-size>
+  </data>
+  <data type="other">
+    <checksum type="sha256">dab6ab07aef50ade82ea7b378cc852948da66971bbcf5638a1dfd4d0aa55bec7</checksum>
+    <open-checksum type="sha256">075ca17cd3aabfdaf9b308ceed0e591080d59f0480681056c9445d72703fa600</open-checksum>
+    <location href="repodata/dab6ab07aef50ade82ea7b378cc852948da66971bbcf5638a1dfd4d0aa55bec7-other.xml.zst"/>
+    <timestamp>1777682425</timestamp>
+    <size>1172</size>
+    <open-size>5461</open-size>
+>>>>>>> a6f936f (Update Xlibre to 25.1.5 (Xorg CVE))
   </data>
 </repomd>
